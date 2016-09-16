@@ -12,9 +12,9 @@ class downloadProcess:
 
     def downloadMp3(self):
         video = pafy.new(self.downloadLink)
-        audiostream = video.getbestaudio()
+        bestaudio = video.getbestaudio(preftype='m4a')
 
-        audiostream.download()
+        bestaudio.download()
 
     def grabDescrip(self):
         video = pafy.new(self.downloadLink)
@@ -226,6 +226,8 @@ def numberReplace():
 
 def timeStampSplit():
     songList = numberReplace()
+    times = []
+    names = []
     songInfo = namedtuple('songInfo', ['name', 'time'])
     REGEXS = [re.compile(r) for r in [
             r'(?P<time>\d+:\d+)\s+(?P<name>.*)$',
@@ -237,16 +239,22 @@ def timeStampSplit():
             m = r.match(item)
             if m:
                 si = songInfo(**m.groupdict())
-                print si
+                names.append(si.name)
+                times.append(si.time)
                 break
         else:
             print 'oh oh' + repr(item)
+    return names, times
 
-def timeStampToSeconds():
+def songSplit(times, names):
+    subprocess.call(["ffmpeg", "-i Audio/your_audio_file.mp3 -acodec copy\
+    -t 00:30:00 -ss 00:00:00 half_hour_split.mp3"])
 
 
 downloadiT = downloadProcess()
-downloadiT.downloadLink = "https://www.youtube.com/watch?v=4dvQKe0d8DM"
+downloadiT.downloadLink = "https://www.youtube.com/watch?v=c5LCmQC_KeU"
 
 if __name__ == '__main__':
-    print timeStampSplit()
+    names, times = timeStampSplit()
+    print names
+    print times
