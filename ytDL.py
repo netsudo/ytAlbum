@@ -1,6 +1,7 @@
 import pafy
 import os
 import sys
+import subprocess
 import re
 from collections import namedtuple
 
@@ -241,14 +242,20 @@ def timeStampSplit():
                 si = songInfo(**m.groupdict())
                 names.append(si.name)
                 times.append(si.time)
+
                 break
         else:
             print 'oh oh' + repr(item)
     return names, times
 
 def songSplit(times, names):
-    subprocess.call(["ffmpeg", "-i Audio/your_audio_file.mp3 -acodec copy\
-    -t 00:30:00 -ss 00:00:00 half_hour_split.mp3"])
+    i = 0
+    j = 1
+    for time in times:
+        subprocess.call(["ffmpeg", "-i", "Audio/" "Night Runner - Starfighter [Full Album].m4a", "-acodec", "copy",
+        "-t", times[j], "-ss", times[i], names[i] + ".m4a"])
+        i+=1
+        j+=1
 
 
 downloadiT = downloadProcess()
@@ -256,5 +263,4 @@ downloadiT.downloadLink = "https://www.youtube.com/watch?v=c5LCmQC_KeU"
 
 if __name__ == '__main__':
     names, times = timeStampSplit()
-    print names
-    print times
+    songSplit(times, names)
