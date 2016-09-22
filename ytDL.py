@@ -252,10 +252,15 @@ def songSplit(times, names):
     i = 0
     j = 1
     for time in times:
-        subprocess.call(["ffmpeg", "-i", "Audio/" "Night Runner - Starfighter [Full Album].m4a", "-acodec", "copy",
-        "-t", times[j], "-ss", times[i], names[i] + ".m4a"])
-        i+=1
-        j+=1
+        try:
+            subprocess.call(["ffmpeg", "-i", "Audio/" "Night Runner - Starfighter [Full Album].m4a", "-acodec", "copy",
+            "-to", times[j], "-ss", times[i], "Audio/" + names[i] + ".m4a"])
+            i+=1
+            j+=1
+        except IndexError:
+            subprocess.call(["ffmpeg", "-i", "Audio/" "Night Runner - Starfighter [Full Album].m4a", "-acodec", "copy",
+            "-to", "5:00:00", "-ss", times[i], "Audio/" + names[i] + ".m4a"])
+
 
 
 downloadiT = downloadProcess()
