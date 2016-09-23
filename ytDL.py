@@ -17,6 +17,11 @@ class downloadProcess:
 
         bestaudio.download()
 
+    def titleGrab(self):
+        video = pafy.new(self.downloadLink)
+
+        return video.title + '.m4a'
+
     def grabDescrip(self):
         video = pafy.new(self.downloadLink)
         vidDescription = video.description
@@ -248,24 +253,26 @@ def timeStampSplit():
             print 'oh oh' + repr(item)
     return names, times
 
-def songSplit(times, names):
+def songSplit(times, names, source):
     i = 0
     j = 1
     for time in times:
         try:
-            subprocess.call(["ffmpeg", "-i", "Audio/" "Night Runner - Starfighter [Full Album].m4a", "-acodec", "copy",
+            subprocess.call(["ffmpeg", "-i", source, "-acodec", "copy",
             "-to", times[j], "-ss", times[i], "Audio/" + names[i] + ".m4a"])
             i+=1
             j+=1
         except IndexError:
-            subprocess.call(["ffmpeg", "-i", "Audio/" "Night Runner - Starfighter [Full Album].m4a", "-acodec", "copy",
+            subprocess.call(["ffmpeg", "-i", source, "-acodec", "copy",
             "-to", "5:00:00", "-ss", times[i], "Audio/" + names[i] + ".m4a"])
 
 
 
 downloadiT = downloadProcess()
-downloadiT.downloadLink = "https://www.youtube.com/watch?v=c5LCmQC_KeU"
+downloadiT.downloadLink = "https://www.youtube.com/watch?v=FYOV_BfJuvs"
 
 if __name__ == '__main__':
+    downloadiT.downloadMp3()
+    source = downloadiT.titleGrab()
     names, times = timeStampSplit()
-    songSplit(times, names)
+    songSplit(times, names, source)
