@@ -236,7 +236,9 @@ def timeStampSplit():
     names = []
     songInfo = namedtuple('songInfo', ['name', 'time'])
     REGEXS = [re.compile(r) for r in [
+            r'(?P<time>\d+:\d+:\d+)\s+(?P<name>.*)$',
             r'(?P<time>\d+:\d+)\s+(?P<name>.*)$',
+            r'(?P<name>.*)\s+(?P<time>\d+:\d+:\d+)$',
             r'(?P<name>.*)\s+(?P<time>\d+:\d+)$',
     ]]
 
