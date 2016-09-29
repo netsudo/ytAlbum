@@ -1,0 +1,175 @@
+<html>
+<style>
+body {font-family: "Lato", sans-serif;}
+
+#Banner {
+    text-align: center;
+    color: green;
+}
+
+th, td, tr {
+    text-align: center;
+    color: green;
+}
+
+ul.tab {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid green;
+}
+
+/* Float the list items side by side */
+ul.tab li {float: left;}
+
+/* Style the links inside the list items */
+ul.tab li a {
+    /*display: inline-block;*/
+    color: green;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of links on hover */
+ul.tab li a:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+ul.tab li a:focus, .active {
+    background-color: black;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    color: green;
+    text-align: center;
+    padding: 16px 12px;
+    border: 1px solid green;
+    border-top: none;
+}
+
+.tabcontent {
+    -webkit-animation: fadeEffect 1s;
+    animation: fadeEffect 1s; /* Fading effect takes 1 second */
+}
+
+@-webkit-keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+</style>
+
+<header>
+  <div id="Banner">
+    <pre>
+  __  __    _______   _____    __
+/\  /\  /\/\_______)\/\ __/\  /\_\
+\ \ \/ / /\(___  __\/) )  \ \( ( (
+  \ \__/ /   / / /   / / /\ \ \\ \_\
+  \__/ /   ( ( (    \ \ \/ / // / /__
+  / / /     \ \ \    ) )__/ /( (_____(
+  \/_/      /_/_/    \/___\/  \/_____/
+    </pre>
+</header>
+<body bgcolor=black>
+  <ul class="tab">
+  <li><a href="#" class="tablinks" onclick="openTab(event, 'Album')">Album</a></li>
+  <li><a href="#" class="tablinks" onclick="openTab(event, 'singleSong')">Single Song</a></li>
+</ul>
+
+<div id="Album" class="tabcontent">
+  <h3>Download Album</h3>
+  <form action="." method="POST">
+    URL:<br>
+    <input type="text" name="albumURL"><br>
+    <br>
+    <input type="submit" name="albumForm" value="Send">
+  </form>
+
+  <details>
+  <summary>Additional Options</summary>
+  <p>Here you can put some content...</p>
+  <p>... and anything else you want :)</p>
+  </details>
+
+  {% if description %}
+    <br>
+    <div id="description">
+      <table style="width:100%">
+        <thread>
+          <tr>
+            <th>Songs</th>
+          </tr>
+        </thread>
+        {% for descrip in description %}
+        <tr>
+          <td>{{ descrip }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  {% endif %}
+
+</div>
+
+<div id="singleSong" class="tabcontent">
+  <h3>Download Single</h3>
+  <form>
+    URL:<br>
+    <input type="text" name="singleURL"><br>
+    <br>
+    <input type="submit">
+  </form>
+</div>
+
+<script>
+function reset() {
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tabcontent.length; i++) {
+        tablinks[i].classList.remove("active");
+    }
+}
+
+function openTab(evt, tabLink) {
+    reset();
+
+    // Show the current tab, and add an "active" class to the link that opened the tab
+    document.getElementById(tabLink).style.display = "block";
+    evt.currentTarget.classList.add("active");
+
+}
+</script>
+
+<script type="text/javascript">
+  function init() {
+      reset();
+
+      document.getElementsByClassName("tabcontent")[0].style.display = "block";
+      document.getElementsByClassName("tablinks")[0].classList.add("active");
+  }
+    window.onload = init;
+</script>
+
+
+</body>
+</html>
