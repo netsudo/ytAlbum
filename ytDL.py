@@ -2,51 +2,47 @@ import pafy
 import os
 import sys
 import subprocess
+import tempfile
 import re
 from collections import namedtuple
 
-class downloadProcess:
-    def __init__(self):
-        self.artistName = ''
-        self.albumName = ''
-        self.downloadLink = ''
+def downloadMp3(downloadLink):
+    video = pafy.new(downloadLink)
+    bestaudio = video.getbestaudio(preftype='m4a')
 
-    def downloadMp3(self):
-        video = pafy.new(self.downloadLink)
-        bestaudio = video.getbestaudio(preftype='m4a')
+    bestaudio.download()
 
-        bestaudio.download()
+def titleGrab(downloadLink):
+    video = pafy.new(downloadLink)
 
-    def titleGrab(self):
-        video = pafy.new(self.downloadLink)
+    return video.title + '.m4a'
 
-        return video.title + '.m4a'
+def grabDescrip(downloadLink):
+    video = pafy.new(downloadLink)
+    vidDescription = video.description
 
-    def grabDescrip(self):
-        video = pafy.new(self.downloadLink)
-        vidDescription = video.description
+    while True:
+        try:
+            if vidDescription != None:
+                return vidDescription.encode('utf-8').splitlines()
+            else:
+                break
 
-        while True:
-            try:
-                if vidDescription != None:
-                    return vidDescription.encode('utf-8').splitlines()
-                else:
-                    break
+        except:
+            continue
 
-            except:
-                continue
-
-def uselessLines():
+def uselessLines(downloadLink):
     good_list = []
-    for line in downloadiT.grabDescrip():
+    full_list = grabDescrip(downloadLink)
+    for line in full_list:
         if re.search(r'^.*\d+:\d\d', line):
             good_list.append(line)
 
     return good_list
 
-def numberedCheck():
+def numberedCheck(downloadLink):
     good_list = []
-    line = uselessLines()[0]
+    line = uselessLines(downloadLink)[0]
     if line.startswith('1.') and not line[0].startswith('1. '):
         return 0
     elif line.startswith('1. '):
@@ -78,12 +74,13 @@ def numberedCheck():
     else:
         return False
 
-def numberReplace():
+def numberReplace(downloadLink):
     i = 0
     unnumberedList = []
-    bulletType = numberedCheck()
+    goodLines = uselessLines(downloadLink)
+    bulletType = numberedCheck(downloadLink)
     if bulletType == 0:
-        for line in uselessLines():
+        for line in goodLines:
             unnumberedLine = line.replace(str(i + 1) + '.', '')
             i+=1
 
@@ -91,7 +88,7 @@ def numberReplace():
         return unnumberedList
 
     elif bulletType == 1:
-        for line in uselessLines():
+        for line in goodLines:
             unnumberedLine = line.replace(str(i + 1) + '. ', '')
             i+=1
 
@@ -99,7 +96,7 @@ def numberReplace():
         return unnumberedList
 
     elif bulletType == 2:
-        for line in uselessLines():
+        for line in goodLines:
             unnumberedLine = line.replace('(' + str(i + 1) + ')', '')
             i+=1
 
@@ -107,7 +104,7 @@ def numberReplace():
         return unnumberedList
 
     elif bulletType == 3:
-        for line in uselessLines():
+        for line in goodLines:
             unnumberedLine = line.replace('(' + str(i + 1) + ') ', '')
             i+=1
 
@@ -115,7 +112,7 @@ def numberReplace():
         return unnumberedList
 
     elif bulletType == 4:
-        for line in uselessLines():
+        for line in goodLines:
             unnumberedLine = line.replace(str(i + 1) + '-', '')
             i+=1
 
@@ -123,7 +120,7 @@ def numberReplace():
         return unnumberedList
 
     elif bulletType == 5:
-        for line in uselessLines():
+        for line in goodLines:
             unnumberedLine = line.replace(str(i + 1) + ' - ', '')
             i+=1
 
@@ -131,7 +128,7 @@ def numberReplace():
         return unnumberedList
 
     elif bulletType == 6:
-        for line in uselessLines():
+        for line in goodLines:
             unnumberedLine = line.replace(str(i + 1) + ' -', '')
             i+=1
 
@@ -139,7 +136,7 @@ def numberReplace():
         return unnumberedList
 
     elif bulletType == 7:
-        for line in uselessLines():
+        for line in goodLines:
             unnumberedLine = line.replace(str(i + 1) + '- ', '')
             i+=1
 
@@ -147,91 +144,91 @@ def numberReplace():
         return unnumberedList
 
     elif bulletType == 8:
-        for line in uselessLines():
+        for line in goodLines:
             if i < 10:
                 unnumberedLine = line.replace('0' + str(i + 1) + '.', '')
                 i+=1
 
                 unnumberedList.append(unnumberedLine)
             else:
-                unnumberedLine = line.replace(str(i+1) + '.')
+                unnumberedLine = line.replace(str(i+1) + '.', '')
 
                 unnumberedList.append(unnumberedLine)
 
         return unnumberedList
 
     elif bulletType == 9:
-        for line in uselessLines():
+        for line in goodLines:
             if i < 10:
                 unnumberedLine = line.replace('0' + str(i + 1) + '. ', '')
                 i+=1
 
                 unnumberedList.append(unnumberedLine)
             else:
-                unnumberedLine = line.replace(str(i+1) + '. ')
+                unnumberedLine = line.replace(str(i+1) + '. ', '')
 
                 unnumberedList.append(unnumberedLine)
 
         return unnumberedList
 
     elif bulletType == 10:
-        for line in uselessLines():
+        for line in goodLines:
             if i < 10:
                 unnumberedLine = line.replace('0' + str(i + 1) + ' - ', '')
                 i+=1
 
                 unnumberedList.append(unnumberedLine)
             else:
-                unnumberedLine = line.replace(str(i+1) + ' - ')
+                unnumberedLine = line.replace(str(i+1) + ' - ', '')
 
                 unnumberedList.append(unnumberedLine)
 
         return unnumberedList
 
     elif bulletType == 11:
-        for line in uselessLines():
+        for line in goodLines:
             if i < 10:
                 unnumberedLine = line.replace('0' + str(i + 1) + '- ', '')
                 i+=1
 
                 unnumberedList.append(unnumberedLine)
             else:
-                unnumberedLine = line.replace(str(i+1) + '- ')
+                unnumberedLine = line.replace(str(i+1) + '- ', '')
 
                 unnumberedList.append(unnumberedLine)
 
         return unnumberedList
 
     elif bulletType == 12:
-        for line in uselessLines():
+        for line in goodLines:
             if i < 10:
                 unnumberedLine = line.replace('0' + str(i + 1) + '-', '')
                 i+=1
 
                 unnumberedList.append(unnumberedLine)
             else:
-                unnumberedLine = line.replace(str(i+1) + '-')
+                unnumberedLine = line.replace(str(i+1) + '-', '')
 
                 unnumberedList.append(unnumberedLine)
 
         return unnumberedList
 
     elif bulletType == 13:
-        for line in uselessLines():
+        for line in goodLines:
             if i < 10:
                 unnumberedLine = line.replace('0' + str(i + 1) + ' -', '')
                 i+=1
 
                 unnumberedList.append(unnumberedLine)
             else:
-                unnumberedLine = line.replace(str(i+1) + ' -')
+                unnumberedLine = line.replace(str(i+1) + ' -', '')
 
                 unnumberedList.append(unnumberedLine)
 
         return unnumberedList
 
-def timeStampSplit():
-    songList = numberReplace()
+def timeStampSplit(downloadLink):
+    songList = numberReplace(downloadLink)
     times = []
     names = []
     songInfo = namedtuple('songInfo', ['name', 'time'])
@@ -255,7 +252,9 @@ def timeStampSplit():
             print 'oh oh' + repr(item)
     return names, times
 
-def songSplit(times, names, source):
+def songSplit(downloadLink):
+    names, times = timeStampSplit(downloadLink)
+    source = titleGrab(downloadLink)
     i = 0
     j = 1
     for time in times:
@@ -267,14 +266,3 @@ def songSplit(times, names, source):
         except IndexError:
             subprocess.call(["ffmpeg", "-i", source, "-acodec", "copy",
             "-to", "5:00:00", "-ss", times[i], "Audio/" + names[i] + ".m4a"])
-
-
-
-downloadiT = downloadProcess()
-downloadiT.downloadLink = "https://www.youtube.com/watch?v=FYOV_BfJuvs"
-
-if __name__ == '__main__':
-    downloadiT.downloadMp3()
-    source = downloadiT.titleGrab()
-    names, times = timeStampSplit()
-    songSplit(times, names, source)

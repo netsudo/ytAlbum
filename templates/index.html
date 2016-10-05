@@ -99,8 +99,31 @@ ul.tab li a:focus, .active {
 
   <details>
   <summary>Additional Options</summary>
-  <p>Here you can put some content...</p>
-  <p>... and anything else you want :)</p>
+  <p>Select number of songs:</p>
+  <select name="select">
+  <option value="value1" selected>2</option>
+  <option value="value2">3</option>
+  <option value="value3">4</option>
+  <option value="value3">5</option>
+  <option value="value3">6</option>
+  <option value="value3">7</option>
+  <option value="value3">8</option>
+  <option value="value3">9</option>
+  <option value="value3">10</option>
+  <option value="value3">11</option>
+  <option value="value3">12</option>
+  <option value="value3">13</option>
+  <option value="value3">14</option>
+  <option value="value3">15</option>
+  <option value="value3">16</option>
+  <option value="value3">17</option>
+  <option value="value3">18</option>
+  <option value="value3">19</option>
+  <option value="value3">20</option>
+  <option value="value3">21</option>
+  <option value="value3">22</option>
+  <option value="value3">23</option>
+</select>
   </details>
 
   {% if description %}
@@ -114,7 +137,13 @@ ul.tab li a:focus, .active {
         </thread>
         {% for descrip in description %}
         <tr>
-          <td>{{ descrip }}</td>
+          <td>
+            <a href="http://example.com">
+              <div style="height:100%;width:100%">
+                {{ descrip }}
+              </div>
+            </a>
+          </td>
         </tr>
         {% endfor %}
       </table>
