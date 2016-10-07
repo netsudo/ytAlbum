@@ -126,7 +126,7 @@ ul.tab li a:focus, .active {
 </select>
   </details>
 
-  {% if description %}
+  {% if lists %}
     <br>
     <div id="description">
       <table style="width:100%">
@@ -135,10 +135,10 @@ ul.tab li a:focus, .active {
             <th>Songs</th>
           </tr>
         </thread>
-        {% for descrip in description %}
+        {% for descrip, song in lists %}
         <tr>
           <td>
-            <a href="http://example.com">
+            <a href="{{ song }}">
               <div style="height:100%;width:100%">
                 {{ descrip }}
               </div>

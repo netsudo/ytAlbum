@@ -252,17 +252,32 @@ def timeStampSplit(downloadLink):
             print 'oh oh' + repr(item)
     return names, times
 
+def pathCreator(downloadLink):
+    names, times = timeStampSplit(downloadLink)
+    paths = []
+    temp = tempfile.mkdtemp(dir="Audio/")
+
+    for name in names:
+        path = temp + "/" + name + ".m4a"
+        paths.append(path)
+
+    return paths
+
 def songSplit(downloadLink):
     names, times = timeStampSplit(downloadLink)
+    path = pathCreator(downloadLink)
     source = titleGrab(downloadLink)
     i = 0
     j = 1
     for time in times:
         try:
             subprocess.call(["ffmpeg", "-i", source, "-acodec", "copy",
-            "-to", times[j], "-ss", times[i], "Audio/" + names[i] + ".m4a"])
+            "-to", times[j], "-ss", times[i], path[i]])
             i+=1
             j+=1
         except IndexError:
             subprocess.call(["ffmpeg", "-i", source, "-acodec", "copy",
-            "-to", "5:00:00", "-ss", times[i], "Audio/" + names[i] + ".m4a"])
+            "-to", "5:00:00", "-ss", times[i], path[i]])
+    subprocess.call(["rm", source])
+
+    return path
