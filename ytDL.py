@@ -261,11 +261,10 @@ def pathCreator(downloadLink):
         path = temp + "/" + name + ".m4a"
         paths.append(path)
 
-    return paths
+    return paths, times, names
 
 def songSplit(downloadLink):
-    names, times = timeStampSplit(downloadLink)
-    path = pathCreator(downloadLink)
+    path, times, names = pathCreator(downloadLink)
     source = titleGrab(downloadLink)
     i = 0
     j = 1
@@ -280,4 +279,4 @@ def songSplit(downloadLink):
             "-to", "5:00:00", "-ss", times[i], path[i]])
     subprocess.call(["rm", source])
 
-    return path
+    return path, names

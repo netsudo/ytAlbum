@@ -13,10 +13,9 @@ def albumPost():
 
     downloadLink = request.form['albumURL']
     ytDL.downloadMp3(downloadLink)
-    description = ytDL.numberReplace(downloadLink)
-    paths = ytDL.songSplit(downloadLink)
+    paths, names = ytDL.songSplit(downloadLink)
 
-    lists = zip(description, paths)
+    lists = zip(names, paths)
 
     return render_template('index.html', lists=lists)
 
