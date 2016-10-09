@@ -145,13 +145,14 @@ def numberReplace(downloadLink):
 
     elif bulletType == 8:
         for line in goodLines:
-            if i < 10:
+            if i < 9:
                 unnumberedLine = line.replace('0' + str(i + 1) + '.', '')
                 i+=1
 
                 unnumberedList.append(unnumberedLine)
             else:
                 unnumberedLine = line.replace(str(i+1) + '.', '')
+                i+=1
 
                 unnumberedList.append(unnumberedLine)
 
@@ -159,13 +160,14 @@ def numberReplace(downloadLink):
 
     elif bulletType == 9:
         for line in goodLines:
-            if i < 10:
+            if i < 9:
                 unnumberedLine = line.replace('0' + str(i + 1) + '. ', '')
                 i+=1
 
                 unnumberedList.append(unnumberedLine)
             else:
-                unnumberedLine = line.replace(str(i+1) + '. ', '')
+                unnumberedLine = line.replace(str(i + 1) + '. ', '')
+                i+=1
 
                 unnumberedList.append(unnumberedLine)
 
@@ -173,13 +175,14 @@ def numberReplace(downloadLink):
 
     elif bulletType == 10:
         for line in goodLines:
-            if i < 10:
+            if i < 9:
                 unnumberedLine = line.replace('0' + str(i + 1) + ' - ', '')
                 i+=1
 
                 unnumberedList.append(unnumberedLine)
             else:
                 unnumberedLine = line.replace(str(i+1) + ' - ', '')
+                i+=1
 
                 unnumberedList.append(unnumberedLine)
 
@@ -187,27 +190,29 @@ def numberReplace(downloadLink):
 
     elif bulletType == 11:
         for line in goodLines:
-            if i < 10:
+            if i < 9:
                 unnumberedLine = line.replace('0' + str(i + 1) + '- ', '')
                 i+=1
 
                 unnumberedList.append(unnumberedLine)
             else:
                 unnumberedLine = line.replace(str(i+1) + '- ', '')
+                i+=1
 
                 unnumberedList.append(unnumberedLine)
 
         return unnumberedList
 
-    elif bulletType == 12:
+    elif bulletType == 9:
         for line in goodLines:
-            if i < 10:
+            if i < 9:
                 unnumberedLine = line.replace('0' + str(i + 1) + '-', '')
                 i+=1
 
                 unnumberedList.append(unnumberedLine)
             else:
                 unnumberedLine = line.replace(str(i+1) + '-', '')
+                i+=1
 
                 unnumberedList.append(unnumberedLine)
 
@@ -215,13 +220,14 @@ def numberReplace(downloadLink):
 
     elif bulletType == 13:
         for line in goodLines:
-            if i < 10:
+            if i < 9:
                 unnumberedLine = line.replace('0' + str(i + 1) + ' -', '')
                 i+=1
 
                 unnumberedList.append(unnumberedLine)
             else:
                 unnumberedLine = line.replace(str(i+1) + ' -', '')
+                i+=1
 
                 unnumberedList.append(unnumberedLine)
 
