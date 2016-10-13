@@ -10,14 +10,38 @@ def index():
 
 @app.route('/', methods=['GET', 'POST'])
 def albumPost():
+    if request.form['submit'] == 'Process':
+        try:
+            downloadLink = request.form['albumURL']
 
-    downloadLink = request.form['albumURL']
-    ytDL.downloadMp3(downloadLink)
-    paths, names = ytDL.songSplit(downloadLink)
+            ytDL.downloadMp3(downloadLink)
+            paths, names = ytDL.songSplit(downloadLink)
 
-    lists = zip(names, paths)
+            lists = zip(names, paths)
 
-    return render_template('index.html', lists=lists)
+            return render_template('index.html', lists=lists)
+
+        except ValueError:
+
+            return render_template('index.html')
+
+        except IOError:
+
+            return render_template('index.html')
+
+    else:
+        try:
+            downloadLink = request.form['singleURL']
+            ytDL.downloadMp3(downloadLink)
+
+            return render_template('index.html')
+
+        except ValueError:
+            return render_template('index.html')
+
+        except IOError:
+            return render_template('index.html')
+
 
 @app.route('/Audio/<path:temp>/<path:filename>')
 def downloadFunc(filename, temp):
