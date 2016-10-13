@@ -94,35 +94,36 @@ ul.tab li a:focus, .active {
     URL:<br>
     <input type="text" name="albumURL"><br>
     <br>
-    <input type="submit" name="albumForm" value="Send">
+    <input type="submit" name="submit" value="Process">
   </form>
 
   <details>
   <summary>Additional Options</summary>
   <p>Select number of songs:</p>
   <select name="select">
-  <option value="value1" selected>2</option>
+  <option value="value0" selected>Select Number of Songs</option>
+  <option value="value1">2</option>
   <option value="value2">3</option>
   <option value="value3">4</option>
-  <option value="value3">5</option>
-  <option value="value3">6</option>
-  <option value="value3">7</option>
-  <option value="value3">8</option>
-  <option value="value3">9</option>
-  <option value="value3">10</option>
-  <option value="value3">11</option>
-  <option value="value3">12</option>
-  <option value="value3">13</option>
-  <option value="value3">14</option>
-  <option value="value3">15</option>
-  <option value="value3">16</option>
-  <option value="value3">17</option>
-  <option value="value3">18</option>
-  <option value="value3">19</option>
-  <option value="value3">20</option>
-  <option value="value3">21</option>
-  <option value="value3">22</option>
-  <option value="value3">23</option>
+  <option value="value4">5</option>
+  <option value="value5">6</option>
+  <option value="value6">7</option>
+  <option value="value7">8</option>
+  <option value="value8">9</option>
+  <option value="value9">10</option>
+  <option value="value10">11</option>
+  <option value="value11">12</option>
+  <option value="value12">13</option>
+  <option value="value13">14</option>
+  <option value="value14">15</option>
+  <option value="value15">16</option>
+  <option value="value16">17</option>
+  <option value="value17">18</option>
+  <option value="value18">19</option>
+  <option value="value19">20</option>
+  <option value="value20">21</option>
+  <option value="value21">22</option>
+  <option value="value22">23</option>
 </select>
   </details>
 
@@ -154,13 +155,12 @@ ul.tab li a:focus, .active {
 
 <div id="singleSong" class="tabcontent">
   <h3>Download Single</h3>
-  <form>
+  <form action="." method="POST">
     URL:<br>
     <input type="text" name="singleURL"><br>
     <br>
-    <input type="submit">
+    <input type="submit" name="submit" value="Download">
   </form>
-</div>
 
 <script>
 function reset() {
