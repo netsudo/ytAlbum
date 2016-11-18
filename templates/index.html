@@ -2,9 +2,13 @@
 <style>
 body {font-family: "Lato", sans-serif;}
 
-#Banner {
+#banner {
     text-align: center;
     color: green;
+}
+
+.inputDiv {
+  display: inline-block;
 }
 
 th, td, tr {
@@ -27,7 +31,6 @@ ul.tab li {float: left;}
 ul.tab li a {
     /*display: inline-block;*/
     color: green;
-    text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     transition: 0.3s;
@@ -71,7 +74,7 @@ ul.tab li a:focus, .active {
 </style>
 
 <header>
-  <div id="Banner">
+  <div id="banner">
     <pre>
   __  __    _______   _____    __
 /\  /\  /\/\_______)\/\ __/\  /\_\
@@ -82,6 +85,7 @@ ul.tab li a:focus, .active {
   \/_/      /_/_/    \/___\/  \/_____/
     </pre>
 </header>
+
 <body bgcolor=black>
   <ul class="tab">
   <li><a href="#" class="tablinks" onclick="openTab(event, 'Album')">Album</a></li>
@@ -99,32 +103,34 @@ ul.tab li a:focus, .active {
 
   <details>
   <summary>Additional Options</summary>
-  <p>Select number of songs:</p>
-  <select name="select">
-  <option value="value0" selected>Select Number of Songs</option>
-  <option value="value1">2</option>
-  <option value="value2">3</option>
-  <option value="value3">4</option>
-  <option value="value4">5</option>
-  <option value="value5">6</option>
-  <option value="value6">7</option>
-  <option value="value7">8</option>
-  <option value="value8">9</option>
-  <option value="value9">10</option>
-  <option value="value10">11</option>
-  <option value="value11">12</option>
-  <option value="value12">13</option>
-  <option value="value13">14</option>
-  <option value="value14">15</option>
-  <option value="value15">16</option>
-  <option value="value16">17</option>
-  <option value="value17">18</option>
-  <option value="value18">19</option>
-  <option value="value19">20</option>
-  <option value="value20">21</option>
-  <option value="value21">22</option>
-  <option value="value22">23</option>
-</select>
+  <br>
+  <select name="select" id="dropdown">
+  <option value="" selected>Select Number of Songs</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+  <option value="13">13</option>
+  <option value="14">14</option>
+  <option value="15">15</option>
+  <option value="16">16</option>
+  <option value="17">17</option>
+  <option value="18">18</option>
+  <option value="19">19</option>
+  <option value="20">20</option>
+  <option value="21">21</option>
+  <option value="22">22</option>
+  <option value="23">23</option>
+  </select>
+  <br>
+  <div id="inputDiv"></div>
   </details>
 
   {% if lists %}
@@ -199,6 +205,22 @@ function openTab(evt, tabLink) {
     window.onload = init;
 </script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#dropdown").change(function() {
+      var selVal = $(this).val();
+      $("#inputDiv").html('');
+      if(selVal > 0) {
+          for(var i = 1; i<= selVal; i++) {
+              $("#inputDiv").append('<br><input id="titleVal" type="text" name="titleVal[]" value="" />');
+              $("#inputDiv").append('<input id="timeVal" type="text" name="timeVal[]" value="" /><br>');
+          }
+      }
+  });
+});
+</script>
 
 </body>
 </html>
