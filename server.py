@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request, send_from_directory, redirect, url_for
 import ytDL
 
 app = Flask(__name__, static_folder='Audio', static_url_path='')
@@ -10,6 +10,7 @@ def index():
 
 @app.route('/', methods=['GET', 'POST'])
 def albumPost():
+    formList = request.form.getlist('titleVal[]')
     if request.form['submit'] == 'Process':
         try:
             downloadLink = request.form['albumURL']
@@ -22,19 +23,19 @@ def albumPost():
             return render_template('index.html', lists=lists)
 
         except ValueError:
-
+            print lol
             return render_template('index.html')
 
         except IOError:
-
+            print lol
             return render_template('index.html')
 
     else:
         try:
             downloadLink = request.form['singleURL']
-            ytDL.downloadMp3(downloadLink)
+            temp, filename = ytDL.downloadSingle(downloadLink)
 
-            return render_template('index.html')
+            return redirect(url_for(downloadFunc(filename, temp)))
 
         except ValueError:
             return render_template('index.html')
