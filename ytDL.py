@@ -1,10 +1,19 @@
 import pafy
-import os
 import sys
 import subprocess
 import tempfile
 import re
 from collections import namedtuple
+
+def downloadSingle(downloadLink):
+    path = tempfile.mkdtemp(dir="Audio/")
+    video = pafy.new(downloadLink)
+    bestaudio = video.getbestaudio(preftype='m4a')
+    filename = video.title + '.m4a'
+
+    bestaudio.download(filepath=path)
+
+    return path, filename
 
 def downloadMp3(downloadLink):
     video = pafy.new(downloadLink)
