@@ -94,7 +94,7 @@ ul.tab li a:focus, .active {
 
 <div id="Album" class="tabcontent">
   <h3>Download Album</h3>
-  <form action="." method="POST">
+  <form  action="." method="POST">
     URL:<br>
     <input type="text" name="albumURL"><br>
     <br>
@@ -130,7 +130,7 @@ ul.tab li a:focus, .active {
   <option value="23">23</option>
   </select>
   <br>
-  <div id="inputDiv"></div>
+  <form id="inputDiv" action="." method="POST"></form>
   </details>
 
   {% if lists %}
@@ -211,7 +211,7 @@ function openTab(evt, tabLink) {
 $(document).ready(function() {
   $("#dropdown").change(function() {
       var selVal = $(this).val();
-      $("#inputDiv").html('');
+      $("#inputDiv").html('<br><input type="submit" name="submit" value="Gogogogo" /><br>');
       if(selVal > 0) {
           for(var i = 1; i<= selVal; i++) {
               $("#inputDiv").append('<br><input id="titleVal" type="text" name="titleVal[]" value="" />');
