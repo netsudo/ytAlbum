@@ -211,12 +211,16 @@ function openTab(evt, tabLink) {
 $(document).ready(function() {
   $("#dropdown").change(function() {
       var selVal = $(this).val();
-      $("#inputDiv").html('<br><input type="submit" name="submit" value="Gogogogo" /><br>');
       if(selVal > 0) {
+          $("#inputDiv").empty();
           for(var i = 1; i<= selVal; i++) {
-              $("#inputDiv").append('<br><input id="titleVal" type="text" name="titleVal[]" value="" />');
-              $("#inputDiv").append('<input id="timeVal" type="text" name="timeVal[]" value="" /><br>');
+              $("#inputDiv").append('<br><input id="titleVal" type="text" name="titleValue" value="" />');
+              $("#inputDiv").append('<input id="timeVal" type="text" name="timeValue" value="" /><br>');
           }
+        $("#inputDiv").append('<br><input type="submit" name="submit" value="Submit" /><br>');
+      }
+      else {
+        $("#inputDiv").html('')
       }
   });
 });
