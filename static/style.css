@@ -1,0 +1,80 @@
+body {font-family: "Lato", sans-serif;}
+
+#banner {
+    text-align: center;
+    color: green;
+}
+
+.inputDiv {
+  display: inline-block;
+}
+
+#titleVal {
+  padding-right: 5px;
+}
+
+#timeVal {
+  padding-left: 5px;
+  width: 60px;
+}
+
+th, td, tr {
+    text-align: center;
+    color: green;
+}
+
+ul.tab {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid green;
+}
+
+/* Float the list items side by side */
+ul.tab li {float: left;}
+
+/* Style the links inside the list items */
+ul.tab li a {
+    /*display: inline-block;*/
+    color: green;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of links on hover */
+ul.tab li a:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+ul.tab li a:focus, .active {
+    background-color: black;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    color: green;
+    text-align: center;
+    padding: 16px 12px;
+    border: 1px solid green;
+    border-top: none;
+}
+
+.tabcontent {
+    -webkit-animation: fadeEffect 1s;
+    animation: fadeEffect 1s; /* Fading effect takes 1 second */
+}
+
+@-webkit-keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
