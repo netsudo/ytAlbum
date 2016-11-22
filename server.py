@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, send_from_directory, redirect, url_for
 import ytDL
 
-app = Flask(__name__, static_folder='Audio', static_url_path='')
+app = Flask(__name__)
 
 @app.route('/')
 def index():
@@ -18,7 +18,7 @@ def albumPost():
         try:
             downloadLink = request.form['albumURL']
 
-            if titleList == None and timeList == None:
+            if not titleList and not timeList:
                 ytDL.downloadMp3(downloadLink)
                 paths, names = ytDL.songSplit(downloadLink)
 
@@ -58,7 +58,7 @@ def albumPost():
 @app.route('/Audio/<path:temp>/<path:filename>')
 def downloadFunc(filename, temp):
 
-    return send_from_directory(app.static_folder, temp + '/' + filename, as_attachment=True)
+    return send_from_directory(app.config['Audio'], temp + '/' + filename, as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
