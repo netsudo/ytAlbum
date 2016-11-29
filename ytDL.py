@@ -88,6 +88,14 @@ def numberedCheck(downloadLink):
         return 16
     elif line.startswith('01 -') and not line.startswith('1 : '):
         return 17
+    elif line.startswith('01 -') and not line.startswith('01:'):
+        return 18
+    elif line.startswith('01 -') and not line.startswith('01: '):
+        return 19
+    elif line.startswith('01 -') and not line.startswith('01 :'):
+        return 20
+    elif line.startswith('01 -') and not line.startswith('01 : '):
+        return 21
     else:
         return False
 
@@ -280,6 +288,66 @@ def numberReplace(downloadLink):
             i+=1
 
             unnumberedList.append(unnumberedLine)
+        return unnumberedList
+
+    elif bulletType == 18:
+        for line in goodLines:
+            if i < 9:
+                unnumberedLine = line.replace('0' + str(i + 1) + ':', '')
+                i+=1
+
+                unnumberedList.append(unnumberedLine)
+            else:
+                unnumberedLine = line.replace(str(i+1) + ':', '')
+                i+=1
+
+                unnumberedList.append(unnumberedLine)
+
+        return unnumberedList
+
+    elif bulletType == 19:
+        for line in goodLines:
+            if i < 9:
+                unnumberedLine = line.replace('0' + str(i + 1) + ': ', '')
+                i+=1
+
+                unnumberedList.append(unnumberedLine)
+            else:
+                unnumberedLine = line.replace(str(i+1) + ': ', '')
+                i+=1
+
+                unnumberedList.append(unnumberedLine)
+
+        return unnumberedList
+
+    elif bulletType == 20:
+        for line in goodLines:
+            if i < 9:
+                unnumberedLine = line.replace('0' + str(i + 1) + ' :', '')
+                i+=1
+
+                unnumberedList.append(unnumberedLine)
+            else:
+                unnumberedLine = line.replace(str(i+1) + ' :', '')
+                i+=1
+
+                unnumberedList.append(unnumberedLine)
+
+        return unnumberedList
+
+    elif bulletType == 21:
+        for line in goodLines:
+            if i < 9:
+                unnumberedLine = line.replace('0' + str(i + 1) + ' : ', '')
+                i+=1
+
+                unnumberedList.append(unnumberedLine)
+            else:
+                unnumberedLine = line.replace(str(i+1) + ' : ', '')
+                i+=1
+
+                unnumberedList.append(unnumberedLine)
+
         return unnumberedList
 
 def timeStampSplit(downloadLink):
