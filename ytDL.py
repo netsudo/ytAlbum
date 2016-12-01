@@ -80,24 +80,30 @@ def numberedCheck(downloadLink):
         return 12
     elif line.startswith('01 -') and not line.startswith('01 - '):
         return 13
-    elif line.startswith('01 -') and not line.startswith('1:'):
+    elif line.startswith('1:') and not line.startswith('1: '):
         return 14
-    elif line.startswith('01 -') and not line.startswith('1: '):
+    elif line.startswith('1: '):
         return 15
-    elif line.startswith('01 -') and not line.startswith('1 :'):
+    elif line.startswith('01 :') and not line.startswith('1 : '):
         return 16
-    elif line.startswith('01 -') and not line.startswith('1 : '):
+    elif line.startswith('1 : '):
         return 17
-    elif line.startswith('01 -') and not line.startswith('01:'):
+    elif line.startswith('01:') and not line.startswith('01: '):
         return 18
-    elif line.startswith('01 -') and not line.startswith('01: '):
+    elif line.startswith('01: '):
         return 19
-    elif line.startswith('01 -') and not line.startswith('01 :'):
+    elif line.startswith('01 :') and not line.startswith('01 : '):
         return 20
-    elif line.startswith('01 -') and not line.startswith('01 : '):
+    elif line.startswith('01 : '):
         return 21
-    elif line.startswith(':'):
+    elif line.startswith(':') and not line.startswith(': '):
         return 22
+    elif line.startswith(' :') and not line.startswith(' : '):
+        return 23
+    elif line.startswith(' : '):
+        return 24
+    elif line.startswith(': '):
+        return 25
     else:
         return False
 
@@ -355,6 +361,30 @@ def numberReplace(downloadLink):
     elif bulletType==22:
         for line in goodLines:
             unnumberedLine = line.replace(':', '')
+
+            unnumberedList.append(unnumberedLine)
+
+        return unnumberedList
+
+    elif bulletType==23:
+        for line in goodLines:
+            unnumberedLine = line.replace(' :', '')
+
+            unnumberedList.append(unnumberedLine)
+
+        return unnumberedList
+
+    elif bulletType==24:
+        for line in goodLines:
+            unnumberedLine = line.replace(' : ', '')
+
+            unnumberedList.append(unnumberedLine)
+
+        return unnumberedList
+
+    elif bulletType==25:
+        for line in goodLines:
+            unnumberedLine = line.replace(': ', '')
 
             unnumberedList.append(unnumberedLine)
 
