@@ -104,6 +104,14 @@ def numberedCheck(downloadLink):
         return 24
     elif line.startswith(': '):
         return 25
+    elif line.startswith('-') and not line.startswith('- '):
+        return 26
+    elif line.startswith('- '):
+        return 27
+    elif line.startswith(' -') and not line.startswith(' - '):
+        return 28
+    elif line.startswith(' - '):
+        return 29
     else:
         return False
 
@@ -385,6 +393,38 @@ def numberReplace(downloadLink):
     elif bulletType==25:
         for line in goodLines:
             unnumberedLine = line.replace(': ', '')
+
+            unnumberedList.append(unnumberedLine)
+
+        return unnumberedList
+
+    elif bulletType==26:
+        for line in goodLines:
+            unnumberedLine = line.replace('-', '')
+
+            unnumberedList.append(unnumberedLine)
+
+        return unnumberedList
+
+    elif bulletType==27:
+        for line in goodLines:
+            unnumberedLine = line.replace('- ', '')
+
+            unnumberedList.append(unnumberedLine)
+
+        return unnumberedList
+
+    elif bulletType==28:
+        for line in goodLines:
+            unnumberedLine = line.replace(' -', '')
+
+            unnumberedList.append(unnumberedLine)
+
+        return unnumberedList
+
+    elif bulletType==29:
+        for line in goodLines:
+            unnumberedLine = line.replace(' - ', '')
 
             unnumberedList.append(unnumberedLine)
 
