@@ -96,6 +96,8 @@ def numberedCheck(downloadLink):
         return 20
     elif line.startswith('01 -') and not line.startswith('01 : '):
         return 21
+    elif line.startswith(':'):
+        return 22
     else:
         return False
 
@@ -347,6 +349,14 @@ def numberReplace(downloadLink):
                 i+=1
 
                 unnumberedList.append(unnumberedLine)
+
+        return unnumberedList
+
+    elif bulletType==22:
+        for line in goodLines:
+            unnumberedLine = line.replace(':', '')
+
+            unnumberedList.append(unnumberedLine)
 
         return unnumberedList
 
