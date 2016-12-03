@@ -18,6 +18,15 @@ body {font-family: "Lato", sans-serif;}
   width: 60px;
 }
 
+div#loading {
+  width: 35px;
+  height: 35px;
+  display: none;
+  margin: auto;
+  background: url(/static/loading.gif) no-repeat;
+  cursor: wait;
+}
+
 th, td, tr {
     text-align: center;
     color: green;
