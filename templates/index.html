@@ -25,7 +25,7 @@
     URL:<br>
     <input type="text" name="albumURL"><br>
     <br>
-    <input type="submit" name="submit" value="Process">
+    <input type="submit" name="submit" value="Process" onclick="loading()">
     <br><br>
     <details>
     <summary>Additional Options</summary>
@@ -60,6 +60,7 @@
     </details>
   </form>
 
+  <div id="loading"></div>
   {% if lists %}
     <br>
     <div id="description">
@@ -95,6 +96,13 @@
     <input type="submit" name="submit" value="Download">
   </form>
 
+<script type="text/javascript">
+  function loading(){
+    $("#loading").show();
+    $("#description").hide();
+  }
+</script>
+
 <script>
 function reset() {
     var i, tabcontent, tablinks;
@@ -124,7 +132,7 @@ function openTab(evt, tabLink) {
 
 <script type="text/javascript">
 function init() {
-    
+    reset();
 
     document.getElementsByClassName("tabcontent")[0].style.display = "block";
     document.getElementsByClassName("tablinks")[0].classList.add("active");
@@ -134,6 +142,13 @@ function init() {
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+  function loading(){
+    $("#loading").show();
+    $("#description").hide();
+  }
+</script>
 
 <script type="text/javascript">
 $(document).ready(function() {
