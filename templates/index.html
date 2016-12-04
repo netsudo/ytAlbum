@@ -56,6 +56,10 @@
     <option value="23">23</option>
     </select>
     <br>
+    <section>
+      <div id="songTitle"></div>
+      <div id="timeTitle"></div>
+    </section>
     <div id="inputDiv"></form>
     </details>
   </form>
@@ -155,7 +159,8 @@ $(document).ready(function() {
   $("#dropdown").change(function() {
       var selVal = $(this).val();
       if(selVal > 0) {
-          $("#inputDiv").empty();
+          $("#songTitle").html('<h4>Songs:</h4>');
+          $("#timeTitle").html('<h4>Times:</h4>')
           for(var i = 1; i<= selVal; i++) {
               $("#inputDiv").append('<br><input id="titleVal" type="text" name="titleValue" value="" />');
               $("#inputDiv").append('<input id="timeVal" name="timeValue" value="" /><br>');
@@ -163,6 +168,8 @@ $(document).ready(function() {
       }
       else {
         $("#inputDiv").html('')
+        $("#songTitle").html('')
+        $("#timeTitle").html('')
       }
   });
 });
