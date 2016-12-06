@@ -1,5 +1,7 @@
 <html>
-<link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='style.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 <header>
   <div id="banner">
     <pre>
@@ -94,7 +96,7 @@
 <div id="singleSong" class="tabcontent">
   <h3>Download Single</h3>
   <form action="." method="POST">
-    URL:<br>
+    URL:
     <input type="text" name="singleURL"><br>
     <br>
     <input type="submit" name="submit" value="Download" onclick="loadingSong()">
@@ -102,86 +104,12 @@
   <div id="loadingSong"></div>
 </div>
 
-<script type="text/javascript">
-  function loading(){
-    $("#loading").show();
-    $("#description").hide();
-  }
-</script>
+<script src="{{ url_for('static', filename='inputs.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='tabs.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='inputs.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='loading.js') }}" type="text/javascript"></script>
 
-<script>
-function reset() {
-    var i, tabcontent, tablinks;
 
-    // Get all elements with class="tabcontent" and hide them
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-
-    // Get all elements with class="tablinks" and remove the class "active"
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tabcontent.length; i++) {
-        tablinks[i].classList.remove("active");
-    }
-}
-
-function openTab(evt, tabLink) {
-    reset();
-
-    // Show the current tab, and add an "active" class to the link that opened the tab
-    document.getElementById(tabLink).style.display = "block";
-    evt.currentTarget.classList.add("active");
-
-}
-</script>
-
-<script type="text/javascript">
-function init() {
-    reset();
-
-    document.getElementsByClassName("tabcontent")[0].style.display = "block";
-    document.getElementsByClassName("tablinks")[0].classList.add("active");
-
-  }
-  window.onload = init;
-</script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-<script type="text/javascript">
-  function loadingAlbum(){
-    $("#loadingAlbum").show();
-    $("#description").hide();
-  }
-</script>
-
-<script type="text/javascript">
-  function loadingSong(){
-    $("#loadingSong").show();
-  }
-</script>
-
-<script type="text/javascript">
-$(document).ready(function() {
-  $("#dropdown").change(function() {
-      var selVal = $(this).val();
-      if(selVal > 0) {
-          $("#songTitle").html('<h4>Songs:</h4>');
-          $("#timeTitle").html('<h4>Times:</h4>')
-          for(var i = 1; i<= selVal; i++) {
-              $("#inputDiv").append('<br><input id="titleVal" type="text" name="titleValue" value="" />');
-              $("#inputDiv").append('<input id="timeVal" name="timeValue" value="" /><br>');
-          }
-      }
-      else {
-        $("#inputDiv").html('')
-        $("#songTitle").html('')
-        $("#timeTitle").html('')
-      }
-  });
-});
-</script>
 
 </body>
 </html>
