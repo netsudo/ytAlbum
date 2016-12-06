@@ -1,4 +1,7 @@
-body {font-family: "Lato", sans-serif;}
+body {
+  font-family: "Lato", sans-serif;
+  background: black;
+}
 
 #banner {
     text-align: center;
