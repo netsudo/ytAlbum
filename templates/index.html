@@ -25,7 +25,7 @@
     URL:<br>
     <input type="text" name="albumURL"><br>
     <br>
-    <input type="submit" name="submit" value="Process" onclick="loading()">
+    <input type="submit" name="submit" value="Process" onclick="loadingAlbum()">
     <br><br>
     <details>
     <summary>Additional Options</summary>
@@ -97,8 +97,10 @@
     URL:<br>
     <input type="text" name="singleURL"><br>
     <br>
-    <input type="submit" name="submit" value="Download">
+    <input type="submit" name="submit" value="Download" onclick="loadingSong()">
   </form>
+  <div id="loadingSong"></div>
+</div>
 
 <script type="text/javascript">
   function loading(){
@@ -148,9 +150,15 @@ function init() {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <script type="text/javascript">
-  function loading(){
-    $("#loading").show();
+  function loadingAlbum(){
+    $("#loadingAlbum").show();
     $("#description").hide();
+  }
+</script>
+
+<script type="text/javascript">
+  function loadingSong(){
+    $("#loadingSong").show();
   }
 </script>
 
