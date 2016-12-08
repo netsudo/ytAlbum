@@ -1,4 +1,5 @@
-<header>ytDL</header>
+ytDL
+==============
 
 If you've ever used a free youtube mp3 downloader, you'd know it's frustrating when you want an album, but it gives you the entire mp3. It's not practical, we all want to know what song we're listening to.
 
