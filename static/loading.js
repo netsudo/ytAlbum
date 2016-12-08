@@ -1,6 +1,5 @@
 function loadingAlbum(){
   $("#loadingAlbum").show();
-  $("#description").hide();
 }
 
 function loadingSong(){
