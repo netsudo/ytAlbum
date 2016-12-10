@@ -27,13 +27,19 @@ def albumPost():
                 return render_template('index.html', lists=lists)
 
             else:
-                ytDL.downloadMp3(downloadLink)
-                paths = ytDL.userSongSplit(downloadLink, titleList, timeList)
+                for time in timeList:
+                    for r in ytDL.timeRegex():
+                        m = r.match(time)
+                        if m:
+                            ytDL.downloadMp3(downloadLink)
+                            paths = ytDL.userSongSplit(downloadLink, titleList, timeList)
 
-                names = titleList
-                lists = zip(names, paths)
+                            names = titleList
+                            lists = zip(names, paths)
 
-                return render_template('index.html', lists=lists)
+                            return render_template('index.html', lists=lists)
+                        else:
+                            return render_template('index.html')
 
         except ValueError:
             return render_template('index.html')
@@ -58,7 +64,7 @@ def albumPost():
 @app.route('/Audio/<path:temp>/<path:filename>')
 def downloadFunc(filename, temp):
 
-    return send_from_directory(app.config['Audio'], temp + '/' + filename, as_attachment=True)
+    return send_from_directory("/Audio/", temp + '/' + filename, as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
