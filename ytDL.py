@@ -430,12 +430,20 @@ def numberReplace(downloadLink):
 
         return unnumberedList
 
-def timeRegex():
+def descripRegex():
     REGEXS = [re.compile(r) for r in [
             r'(?P<time>\d+:\d+:\d+)\s+(?P<name>.*)$',
             r'(?P<time>\d+:\d+)\s+(?P<name>.*)$',
             r'(?P<name>.*)\s+(?P<time>\d+:\d+:\d+)$',
             r'(?P<name>.*)\s+(?P<time>\d+:\d+)$',
+    ]]
+
+    return REGEXS
+
+def timeRegex():
+    REGEXS = [re.compile(r) for r in [
+            r'(?P<time>\d+:\d+:\d+)$',
+            r'(?P<time>\d+:\d+)$',
     ]]
 
     return REGEXS
@@ -447,7 +455,7 @@ def timeStampSplit(downloadLink):
     songInfo = namedtuple('songInfo', ['name', 'time'])
 
     for item in songList:
-        for r in timeRegex():
+        for r in descripRegex():
             m = r.match(item)
             if m:
                 si = songInfo(**m.groupdict())
