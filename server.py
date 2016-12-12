@@ -31,15 +31,18 @@ def albumPost():
                     for r in ytDL.timeRegex():
                         m = r.match(time)
                         if m:
-                            ytDL.downloadMp3(downloadLink)
-                            paths = ytDL.userSongSplit(downloadLink, titleList, timeList)
+                            break
 
-                            names = titleList
-                            lists = zip(names, paths)
+                    else:
+                        return render_template('index.html')
 
-                            return render_template('index.html', lists=lists)
-                        else:
-                            return render_template('index.html')
+                ytDL.downloadMp3(downloadLink)
+                paths = ytDL.userSongSplit(downloadLink, titleList, timeList)
+
+                names = titleList
+                lists = zip(names, paths)
+
+                return render_template('index.html', lists=lists)
 
         except ValueError:
             return render_template('index.html')

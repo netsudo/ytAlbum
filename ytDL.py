@@ -465,6 +465,7 @@ def timeStampSplit(downloadLink):
                 break
         else:
             print 'oh oh' + repr(item)
+
     return names, times
 
 def pathCreator(downloadLink):
